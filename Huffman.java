@@ -12,6 +12,11 @@ class node{
 }
 
 public class Huffman {
+
+    static HashMap<Character, String> mp;
+    public Huffman(){
+        mp=  new HashMap<>();
+    }
     public static node huffman(char[]arr, int[]freq, int n){
         PriorityQueue<node> pq= new PriorityQueue<>((a, b) -> a.fr - b.fr);
         for(int i=0;i<n;i++){
@@ -47,6 +52,7 @@ public class Huffman {
         }
 
         if (nd.left == null && nd.right == null) {
+            mp.put(nd.s,code);
             System.out.println(nd.s + ": " + code);
         }
 
@@ -78,7 +84,15 @@ public class Huffman {
             idx++;
         }
         node tree= huffman(arr, freq, arr.length);
+        Huffman obj= new Huffman();
         printHuffmanTree(tree, "");
+
+        System.out.println("The code for the given string will be: ");
+        
+        for(int i=0;i<n;i++){
+            char ch= st.charAt(i);
+            System.out.print(mp.get(ch));
+        }
 
     }
 }
